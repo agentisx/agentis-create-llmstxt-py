@@ -18,7 +18,7 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
-# CORS(app) # Add this line to enable CORS for the entire app
+CORS(app) # Add this line to enable CORS for the entire app
 # CORS(app, resources={r"/api/*": {"origins": "https://www.agentis.ir"}}) # Restrict CORS to specific origin
 
 class FirecrawlLLMsTextGenerator:
@@ -169,7 +169,7 @@ Return the response in JSON format:
         return llms_data, llms_full_data
 
 @app.route('/api/generate-llms', methods=['POST'])
-@cross_origin() # Add this decorator to enable CORS for this route
+# @cross_origin() # Add this decorator to enable CORS for this route
 def generate_llms_endpoint():
     """
     HTTP endpoint to trigger the LLM text generation.
