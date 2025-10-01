@@ -7,6 +7,7 @@ from flask import Flask, request, jsonify
 from dotenv import load_dotenv
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Dict, List, Optional, Tuple
+from flask_cors import CORS, cross_origin
 
 # Load environment variables from .env file
 load_dotenv()
@@ -17,6 +18,8 @@ logger = logging.getLogger(__name__)
 
 # Initialize Flask app
 app = Flask(__name__)
+# CORS(app) # Add this line to enable CORS for the entire app
+# CORS(app, resources={r"/api/*": {"origins": "https://www.agentis.ir"}}) # Restrict CORS to specific origin
 
 class FirecrawlLLMsTextGenerator:
     """Generate llms.txt files using Firecrawl and OpenAI."""
@@ -166,6 +169,7 @@ Return the response in JSON format:
         return llms_data, llms_full_data
 
 @app.route('/api/generate-llms', methods=['POST'])
+@cross_origin() # Add this decorator to enable CORS for this route
 def generate_llms_endpoint():
     """
     HTTP endpoint to trigger the LLM text generation.
