@@ -176,6 +176,7 @@ def generate_llms_endpoint():
     Expects a JSON payload with a 'url' key.
     """
     data = request.get_json()
+    print(f"Received data: {data}")  # Add this line for debugging
     if not data or 'url' not in data:
         return jsonify({"error": "Missing 'url' in request body"}), 400
     
